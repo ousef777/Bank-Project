@@ -1,7 +1,10 @@
+import 'package:bank_app/dashboard.dart';
 import 'package:flutter/material.dart';
 //import 'package:sign_in/pages/home_screen.dart';
 import 'package:bank_app/signin.dart';
 import 'package:bank_app/signup.dart';
+import 'profile.dart';
+import 'transfer.dart';
 // Step 2
 import 'package:go_router/go_router.dart';
 
@@ -27,16 +30,20 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const Dashboard(),
       ),
       GoRoute(
         path: '/signed_up',
         builder: (context, state) => const Signup(),
       ),
-      // GoRoute(
-      //   path: '/signed_up',
-      //   builder: (context, state) => SignedIn(username: state.extra as String),
-      // ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const Profile(),//SignedIn(username: state.extra as String),
+      ),
+      GoRoute(
+        path: '/transfer',
+        builder: (context, state) => const Transfer(),
+      ),
     ],
   );
 }
