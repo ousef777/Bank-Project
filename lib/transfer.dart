@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class Transfer extends StatelessWidget {
   final String condition;
   Transfer({super.key, required this.condition});
-
+  final destinationController = TextEditingController();
   final amountController = TextEditingController();
 
   @override
@@ -17,18 +17,18 @@ class Transfer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            if (condition == "transfer") const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 100.0),
+            if (condition == "transfer") Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 100.0),
               child: TextField(
-                //controller: usernameController,
-                decoration: InputDecoration(
+                controller: destinationController,
+                decoration: const InputDecoration(
                   hintText: "Destination",
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.person,
                     color: Colors.blue,
                   ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     borderSide: BorderSide(
                       color: Colors.blue,
                     ),
@@ -63,6 +63,9 @@ class Transfer extends StatelessWidget {
             onPressed: () {
               double mod = (condition == "deposit") ? 1 : -1;
               Provider.of<UserProvider>(context, listen: false).currentUser?.balance += (double.parse(amountController.text) * mod);
+              if (condition == "transfer") {
+                Provider.of<UserProvider>(context, listen: false).transfer(double.parse(amountController.text), destinationController.text);
+              }
               GoRouter.of(context).pop();
             }, 
             child: const Padding(

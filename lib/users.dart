@@ -48,4 +48,9 @@ class UserProvider extends ChangeNotifier {
   void recordTransaction(String transaction, double amount) {
     currentUser?.history.add([transaction, amount]);
   }
+
+  void transfer(double amount, String username) {
+    User user = _users.firstWhere((element) => element.username == username, orElse: () => User(username: "unknown", password: "unknown", balance: bonus));
+    user.balance += amount;
+  }
 }
