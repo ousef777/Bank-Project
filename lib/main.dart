@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/transfer',
-        builder: (context, state) => Transfer(),
+        builder: (context, state) => Transfer(condition: state.extra as String,),
       ),
     ],
   );

@@ -5,6 +5,8 @@ class User {
   double balance;
   int phoneNumber = 123456789;
   String fullName = "None";
+  
+  List<List> history = [];
 
   User({
     required this.username, 
@@ -40,7 +42,10 @@ class UserProvider extends ChangeNotifier {
   }
 
   String getBalance() {
-    notifyListeners();
     return "Balance: \$${currentUser?.balance}";
+  }
+
+  void recordTransaction(String transaction, double amount) {
+    currentUser?.history.add([transaction, amount]);
   }
 }

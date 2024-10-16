@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (Provider.of<UserProvider>(context, listen: false).logUser(usernameController.text, passwordController.text)) {
                 usernameController.text = "";
                 passwordController.text = "";
-                GoRouter.of(context).push('/dashboard');
+                GoRouter.of(context).go('/dashboard');
               }
               else {
                 showError(context, "Username and/or Password is wrong");
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text("Login", style: TextStyle(color: Colors.white),),
+              child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 28),),
             ),
           ),
           if (true) Padding(
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }, 
               child: const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("Sign up", style: TextStyle(color: Colors.white),),
+                  child: Text("Sign up", style: TextStyle(color: Colors.white, fontSize: 28),),
               ),
             ),
           )

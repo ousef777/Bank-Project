@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Transfer extends StatelessWidget {
-  Transfer({super.key});
+  final String condition;
+  Transfer({super.key, required this.condition});
 
-  final bool appear = false;
   final amountController = TextEditingController();
 
   @override
@@ -17,7 +17,7 @@ class Transfer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            if (appear) const Padding(
+            if (condition == "transfer") const Padding(
               padding: EdgeInsets.symmetric(horizontal: 100.0),
               child: TextField(
                 //controller: usernameController,
@@ -61,7 +61,8 @@ class Transfer extends StatelessWidget {
                   WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
             ),
             onPressed: () {
-              Provider.of<UserProvider>(context, listen: false).currentUser?.balance += double.parse(amountController.text);
+              double mod = (condition == "deposit") ? 1 : -1;
+              Provider.of<UserProvider>(context, listen: false).currentUser?.balance += (double.parse(amountController.text) * mod);
               GoRouter.of(context).pop();
             }, 
             child: const Padding(

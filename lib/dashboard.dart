@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatelessWidget {
-  Dashboard({super.key});
+  const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class Dashboard extends StatelessWidget {
                         WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
                   ),
                   onPressed: () {
-                    GoRouter.of(context).push('/transfer');
+                    GoRouter.of(context).push('/transfer', extra: "deposit");
                   }, 
                   child: const Padding(
                       padding: EdgeInsets.all(8.0),
@@ -60,14 +60,34 @@ class Dashboard extends StatelessWidget {
                         WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
                   ),
                   onPressed: () {
-                    GoRouter.of(context).push('/transfer');
+                    GoRouter.of(context).push('/transfer', extra: "withdraw");
                   }, 
                   child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text("Withdraw", style: TextStyle(color: Colors.white),),
                   ),
                 ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
+                  ),
+                  onPressed: () {
+                    GoRouter.of(context).push('/transfer', extra: "transfer");
+                  }, 
+                  child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Transfer", style: TextStyle(color: Colors.white),),
+                  ),
+                ),
               ],
+            ),
+            FloatingActionButton(
+              elevation: 12,
+              onPressed: () {
+                GoRouter.of(context).go('/');
+              },
+              child: const Text("Sign out"),
             )
           ],
         ),

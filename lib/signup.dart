@@ -18,8 +18,10 @@ class _SignupState extends State<Signup> {
   final fullnameController = TextEditingController();
   final phoneController = TextEditingController();
 
-  Color emailBorderColor = Colors.deepPurpleAccent;
+  Color usernameBorderColor = Colors.deepPurpleAccent;
   Color passwordBorderColor = Colors.deepPurpleAccent;
+  Color fullnameBorderColor = Colors.deepPurpleAccent;
+  Color phoneBorderColor = Colors.deepPurpleAccent;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +40,12 @@ class _SignupState extends State<Signup> {
                 hintText: "Username",
                 prefixIcon: Icon(
                   Icons.account_circle,
-                  color: emailBorderColor,
+                  color: usernameBorderColor,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                   borderSide: BorderSide(
-                    color: emailBorderColor,
+                    color: usernameBorderColor,
                   ),
                 ),
               ),
@@ -71,11 +73,11 @@ class _SignupState extends State<Signup> {
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: createTextField("Full Name", fullnameController, passwordBorderColor)
+            child: createTextField("Full Name", fullnameController, passwordBorderColor, Icons.person)
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: createTextField("Phone Number", phoneController, passwordBorderColor)
+            child: createTextField("Phone Number", phoneController, passwordBorderColor, Icons.phone)
           ),
           ElevatedButton(
             style: ButtonStyle(
@@ -83,8 +85,22 @@ class _SignupState extends State<Signup> {
                   WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
             ),
             onPressed: () {
-              Provider.of<UserProvider>(context, listen: false).addUser(usernameController.text, passwordController.text, int.parse(phoneController.text), fullnameController.text);
-              GoRouter.of(context).pop();
+              List<bool> checkList = [usernameController.text.isNotEmpty, passwordController.text.isNotEmpty, passwordController.text.isNotEmpty, fullnameController.text.isNotEmpty];
+              usernameBorderColor = (checkList[0]) ? Colors.blue : Colors.red;
+              passwordBorderColor = (checkList[1]) ? Colors.blue : Colors.red;
+              fullnameBorderColor = (checkList[2]) ? Colors.blue : Colors.red;
+              phoneBorderColor = (checkList[3]) ? Colors.blue : Colors.red;
+              setState(() {
+                
+              });
+              if (checkList[0] && checkList[1] && checkList[2] && checkList[3]) {
+                Provider.of<UserProvider>(context, listen: false).addUser(
+                usernameController.text, 
+                passwordController.text, 
+                int.parse(phoneController.text), 
+                fullnameController.text);
+                GoRouter.of(context).pop();
+              }
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -106,13 +122,13 @@ void showError(BuildContext context, String message) {
   );
 }
 
-TextField createTextField(String hintText, TextEditingController controller, Color borderColor) {
+TextField createTextField(String hintText, TextEditingController controller, Color borderColor, IconData icon) {
   return TextField(
               controller: controller,  //hide the text
               decoration: InputDecoration(
                 hintText: hintText,
                 prefixIcon: Icon(
-                  Icons.key,
+                  icon,
                   color: borderColor,
                 ),
                 enabledBorder: OutlineInputBorder(
