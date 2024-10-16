@@ -12,97 +12,130 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final usernameController = TextEditingController();
-
   final passwordController = TextEditingController();
 
-  Color usernameBorderColor = Colors.deepPurpleAccent;
-  Color passwordBorderColor = Colors.deepPurpleAccent;
+  Color usernameBorderColor = const Color(0xFF005BAA); // Matching Burgan Bank blue
+  Color passwordBorderColor = const Color(0xFF005BAA); // Matching Burgan Bank blue
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sign in"),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextField(
+      backgroundColor: const Color(0xFFE5F1F9), // Light blue background
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+          children: [
+            const SizedBox(height: 40), // Add spacing at the top
+            const Center(
+              child: CircleAvatar(
+                radius: 60, // Adjust the size of the logo
+                backgroundImage: AssetImage('assets/images/burgan.jpg'), // Path to your logo
+                backgroundColor: Colors.transparent, // Transparent background
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Welcome to Burgan Bank',
+              style: TextStyle(
+                color: Color(0xFF005BAA), // Burgan Bank Blue
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 30),
+            TextField(
               controller: usernameController,
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
-                hintText: "Username",
+                filled: true,
+                fillColor: Colors.white,
+                hintText: "Username / Email",
+                hintStyle: const TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
                   Icons.account_circle,
-                  color: usernameBorderColor,
+                  color: Colors.grey,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
                     color: usernameBorderColor,
                   ),
                 ),
-              ),
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextField(
-              controller: passwordController,
-              obscureText: true,   //hide the text
-              decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: Icon(
-                  Icons.key,
-                  color: passwordBorderColor,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                  borderSide: BorderSide(
-                    color: passwordBorderColor,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF005BAA), // Burgan Bank Blue
+                    width: 2,
                   ),
                 ),
               ),
             ),
-          ),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor:
-                  WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
+            const SizedBox(height: 20),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              style: const TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: "Password",
+                hintStyle: const TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: Colors.grey,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: passwordBorderColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF005BAA), // Burgan Bank Blue
+                    width: 2,
+                  ),
+                ),
+              ),
             ),
-            onPressed: () {
-              if (Provider.of<UserProvider>(context, listen: false).logUser(usernameController.text, passwordController.text)) {
-                usernameController.text = "";
-                passwordController.text = "";
-                GoRouter.of(context).go('/dashboard');
-              }
-              else {
-                showError(context, "Username and/or Password is wrong");
-              }
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 28),),
-            ),
-          ),
-          if (true) Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                    WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF005BAA), // Burgan Bank Blue
+                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               onPressed: () {
-                GoRouter.of(context).push('/signed_up');
-              }, 
-              child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("Sign up", style: TextStyle(color: Colors.white, fontSize: 28),),
+                if (Provider.of<UserProvider>(context, listen: false)
+                    .logUser(usernameController.text, passwordController.text)) {
+                  usernameController.clear();
+                  passwordController.clear();
+                  GoRouter.of(context).go('/dashboard');
+                } else {
+                  showError(context, "Email and/or Password is wrong");
+                }
+              },
+              child: const Text(
+                "Login",
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
-          )
-        ],
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).push('/signed_up');
+              },
+              child: const Text(
+                "Don't have an account? Sign Up",
+                style: TextStyle(color: Color(0xFF005BAA)), // Burgan Bank Blue
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -113,6 +146,6 @@ void showError(BuildContext context, String message) {
     SnackBar(
       duration: const Duration(seconds: 5),
       content: Text(message),
-    )
+    ),
   );
 }

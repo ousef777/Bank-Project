@@ -1,9 +1,7 @@
-//import 'package:bank_app/dashboard.dart';
 import 'package:bank_app/users.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -18,125 +16,190 @@ class _SignupState extends State<Signup> {
   final fullnameController = TextEditingController();
   final phoneController = TextEditingController();
 
-  Color usernameBorderColor = Colors.deepPurpleAccent;
-  Color passwordBorderColor = Colors.deepPurpleAccent;
-  Color fullnameBorderColor = Colors.deepPurpleAccent;
-  Color phoneBorderColor = Colors.deepPurpleAccent;
+  Color usernameBorderColor = const Color(0xFF005BAA);
+  Color passwordBorderColor = const Color(0xFF005BAA);
+  Color fullnameBorderColor = const Color(0xFF005BAA);
+  Color phoneBorderColor = const Color(0xFF005BAA);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sign Up"),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextField(
+      backgroundColor: const Color(0xFFE5F1F9),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+             Container(height: 40),
+            const Center(
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage('assets/images/burgan.jpg'),
+                backgroundColor: Colors.transparent,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Create a New Account',
+              style: TextStyle(
+                color: Color(0xFF005BAA),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 30),
+            TextField(
               controller: usernameController,
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
-                hintText: "Username",
+                filled: true,
+                fillColor: Colors.white,
+                hintText: "Email",
+                hintStyle: const TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
                   Icons.account_circle,
                   color: usernameBorderColor,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
                     color: usernameBorderColor,
                   ),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF005BAA),
+                    width: 2,
+                  ),
+                ),
               ),
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextField(
+            ),
+            const SizedBox(height: 20),
+            TextField(
               controller: passwordController,
-              obscureText: true,   //hide the text
+              obscureText: true,
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
                 hintText: "Password",
+                hintStyle: const TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
-                  Icons.key,
+                  Icons.lock_outline,
                   color: passwordBorderColor,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
                     color: passwordBorderColor,
                   ),
                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: createTextField("Full Name", fullnameController, passwordBorderColor, Icons.person)
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: createTextField("Phone Number", phoneController, passwordBorderColor, Icons.phone)
-          ),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor:
-                  WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
-            ),
-            onPressed: () {
-              List<bool> checkList = [usernameController.text.isNotEmpty, passwordController.text.isNotEmpty, passwordController.text.isNotEmpty, fullnameController.text.isNotEmpty];
-              usernameBorderColor = (checkList[0]) ? Colors.blue : Colors.red;
-              passwordBorderColor = (checkList[1]) ? Colors.blue : Colors.red;
-              fullnameBorderColor = (checkList[2]) ? Colors.blue : Colors.red;
-              phoneBorderColor = (checkList[3]) ? Colors.blue : Colors.red;
-              setState(() {
-                
-              });
-              if (checkList[0] && checkList[1] && checkList[2] && checkList[3]) {
-                Provider.of<UserProvider>(context, listen: false).addUser(
-                usernameController.text, 
-                passwordController.text, 
-                int.parse(phoneController.text), 
-                fullnameController.text);
-                GoRouter.of(context).pop();
-              }
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Submit", style: TextStyle(color: Colors.white),),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-void showError(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      duration: const Duration(seconds: 5),
-      content: Text(message),
-    )
-  );
-}
-
-TextField createTextField(String hintText, TextEditingController controller, Color borderColor, IconData icon) {
-  return TextField(
-              controller: controller,  //hide the text
-              decoration: InputDecoration(
-                hintText: hintText,
-                prefixIcon: Icon(
-                  icon,
-                  color: borderColor,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                  borderSide: BorderSide(
-                    color: borderColor,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF005BAA),
+                    width: 2,
                   ),
                 ),
               ),
-            );
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: fullnameController,
+              style: const TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: "Full Name",
+                hintStyle: const TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: fullnameBorderColor,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: fullnameBorderColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF005BAA),
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: phoneController,
+              style: const TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: "Phone Number",
+                hintStyle: const TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.phone,
+                  color: phoneBorderColor,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: phoneBorderColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF005BAA),
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF005BAA),
+                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                List<bool> checkList = [
+                  usernameController.text.isNotEmpty,
+                  passwordController.text.isNotEmpty,
+                  fullnameController.text.isNotEmpty,
+                  phoneController.text.isNotEmpty
+                ];
+                setState(() {
+                  usernameBorderColor = checkList[0] ? const Color(0xFF005BAA) : Colors.red;
+                  passwordBorderColor = checkList[1] ? const Color(0xFF005BAA) : Colors.red;
+                  fullnameBorderColor = checkList[2] ? const Color(0xFF005BAA) : Colors.red;
+                  phoneBorderColor = checkList[3] ? const Color(0xFF005BAA) : Colors.red;
+                });
+                if (checkList.every((element) => element)) {
+                  Provider.of<UserProvider>(context, listen: false).addUser(
+                    usernameController.text,
+                    passwordController.text,
+                    int.parse(phoneController.text),
+                    fullnameController.text,
+                  );
+                  GoRouter.of(context).pop();
+                }
+              },
+              child: const Text(
+                "Submit",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
