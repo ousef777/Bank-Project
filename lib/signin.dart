@@ -20,25 +20,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE5F1F9), // Light blue background
+      backgroundColor: const Color(0xFFE5F1F9), 
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+          mainAxisAlignment: MainAxisAlignment.center, 
           children: [
-            const SizedBox(height: 40), // Add spacing at the top
+            const SizedBox(height: 40), 
             const Center(
               child: CircleAvatar(
-                radius: 60, // Adjust the size of the logo
-                backgroundImage: AssetImage('assets/images/burgan.jpg'), // Path to your logo
-                backgroundColor: Colors.transparent, // Transparent background
+                radius: 60, 
+                backgroundImage: AssetImage('assets/images/burgan.jpg'), 
+                backgroundColor: Colors.transparent, 
               ),
             ),
             const SizedBox(height: 20),
             const Text(
               'Welcome to Burgan Bank',
               style: TextStyle(
-                color: Color(0xFF005BAA), // Burgan Bank Blue
+                color: Color(0xFF005BAA), 
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
-                    color: Color(0xFF005BAA), // Burgan Bank Blue
+                    color: Color(0xFF005BAA), 
                     width: 2,
                   ),
                 ),
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
-                    color: Color(0xFF005BAA), // Burgan Bank Blue
+                    color: Color(0xFF005BAA), 
                     width: 2,
                   ),
                 ),
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 30),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF005BAA), // Burgan Bank Blue
+                backgroundColor: const Color(0xFF005BAA), 
                 padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
