@@ -5,11 +5,17 @@ import 'package:bank_app/signin.dart';
 import 'package:bank_app/signup.dart';
 import 'profile.dart';
 import 'transfer.dart';
+import 'users.dart';
 // Step 2
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/dashboard',
-        builder: (context, state) => const Dashboard(),
+        builder: (context, state) => Dashboard(),
       ),
       GoRoute(
         path: '/signed_up',
@@ -46,7 +52,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/transfer',
-        builder: (context, state) => const Transfer(),
+        builder: (context, state) => Transfer(),
       ),
     ],
   );

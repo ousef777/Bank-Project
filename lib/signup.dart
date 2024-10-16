@@ -1,20 +1,22 @@
+//import 'package:bank_app/dashboard.dart';
+import 'package:bank_app/users.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 
 class Signup extends StatefulWidget {
-  const Signup({Key? key}) : super(key: key);
+  const Signup({super.key});
 
   @override
   State<Signup> createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
-  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final fullnameController = TextEditingController();
   final phoneController = TextEditingController();
-
 
   Color emailBorderColor = Colors.deepPurpleAccent;
   Color passwordBorderColor = Colors.deepPurpleAccent;
@@ -31,9 +33,9 @@ class _SignupState extends State<Signup> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: TextField(
-              controller: emailController,
+              controller: usernameController,
               decoration: InputDecoration(
-                hintText: "Email",
+                hintText: "Username",
                 prefixIcon: Icon(
                   Icons.account_circle,
                   color: emailBorderColor,
@@ -81,23 +83,8 @@ class _SignupState extends State<Signup> {
                   WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
             ),
             onPressed: () {
-              // Step 8
-              if (emailController.text.isEmpty) {
-                showError(context, "Enter the Email");
-                setState(() {
-                  emailBorderColor = Colors.red;
-                });
-              }
-              else if (passwordController.text == "12345") {
-                GoRouter.of(context).go('/signed_in', extra: emailController.text); //switched from .push() to .go()
-              }
-              else {
-                showError(context, "Wrong Password");
-                setState(() {
-                  emailBorderColor = Colors.deepPurpleAccent;
-                  passwordBorderColor = Colors.red;
-                });
-              }
+              Provider.of<UserProvider>(context, listen: false).addUser(usernameController.text, passwordController.text, int.parse(phoneController.text), fullnameController.text);
+              GoRouter.of(context).pop();
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),

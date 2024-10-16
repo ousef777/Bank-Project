@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'users.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -70,7 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
             ),
             onPressed: () {
-              GoRouter.of(context).push('/dashboard'); 
+              if (Provider.of<UserProvider>(context, listen: false).logUser(usernameController.text, passwordController.text)) {
+                usernameController.text = "";
+                passwordController.text = "";
+                GoRouter.of(context).push('/dashboard');
+              }
+              else {
+                showError(context, "Username and/or Password is wrong");
+              }
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),

@@ -1,10 +1,14 @@
+import 'package:bank_app/users.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserProvider>(context, listen: true);
+    
     return Scaffold(
         appBar: AppBar(title: const Text("Profile"),),
         body: SafeArea(
@@ -17,12 +21,12 @@ class Profile extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 32.0),
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Name: Hedgehog", style: TextStyle(fontSize: 28.0)),
-                      Text("Age: 3", style: TextStyle(fontSize: 28.0)),
-                      Text("Gender: Male", style: TextStyle(fontSize: 28.0)),
+                      Text("Full Name: ${provider.currentUser?.fullName}", style: TextStyle(fontSize: 28.0)),
+                      Text("PhoneNumber: ${provider.currentUser?.phoneNumber}", style: TextStyle(fontSize: 28.0)),
+                      //Text("Gender: Male", style: TextStyle(fontSize: 28.0)),
                     ],
                   )
                 ),
