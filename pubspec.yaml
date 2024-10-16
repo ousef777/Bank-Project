@@ -16,8 +16,25 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_native_splash: 2.4.1
+  flutter_launcher_icons: 0.14.1
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+flutter_native_splash:
+  color: "#ffffff" # Background color for the splash screen
+  image: assets/images/burgan.png # Burgan Bank logo
+  android: true
+  ios: true
+  web: true
+  fullscreen: true # Enable fullscreen splash screen
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/burgan.jpg" # Path to your Burgan Bank logo
+
