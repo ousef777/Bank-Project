@@ -70,23 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
             ),
             onPressed: () {
-              // Step 8
-              if (usernameController.text.isEmpty) {
-                showError(context, "Enter the Username");
-                setState(() {
-                  usernameBorderColor = Colors.red;
-                });
-              }
-              else if (passwordController.text == "12345") {
-                GoRouter.of(context).go('/signed_in', extra: usernameController.text); //switched from .push() to .go()
-              }
-              else {
-                showError(context, "Wrong Password");
-                setState(() {
-                  usernameBorderColor = Colors.deepPurpleAccent;
-                  passwordBorderColor = Colors.red;
-                });
-              }
+              GoRouter.of(context).push('/dashboard'); 
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),

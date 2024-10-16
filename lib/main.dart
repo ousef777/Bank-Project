@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/dashboard',
         builder: (context, state) => const Dashboard(),
       ),
       GoRoute(

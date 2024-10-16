@@ -5,9 +5,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
+        appBar: AppBar(title: const Text("Profile"),),
         body: SafeArea(
           child: Center(
             child: Column(
@@ -31,7 +30,6 @@ class Profile extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
