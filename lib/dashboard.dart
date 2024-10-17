@@ -123,7 +123,7 @@ class Dashboard extends StatelessWidget {
               reverse: true,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: provider.currentUser?.history.length ?? 0,
+              itemCount: provider.currentUser.history.length,
               itemBuilder: (BuildContext context, int index) {
                 final transactionType = provider.currentUser.history[index][0];
                 final transactionAmount = double.parse(provider.currentUser.history[index][1].toString());
