@@ -57,7 +57,7 @@ class UserProvider extends ChangeNotifier {
 
   // Get balance for current user
   String getBalance() {
-    return "Balance: ${currentUser.balance.toStringAsFixed(2)} KWD";
+    return "${currentUser.balance.toStringAsFixed(2)} KWD";
   }
 
   // Record transaction for the current user

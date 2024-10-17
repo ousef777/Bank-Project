@@ -11,11 +11,13 @@ class Transfer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final provider = Provider.of<UserProvider>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Transfer"),
+        title: Text(condition == "deposit"
+            ? "Deposit"
+            : condition == "withdraw"
+                ? "Withdraw"
+                : "Transfer"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -27,9 +29,9 @@ class Transfer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 16),
-            const Text(
-              'Select amount to transfer into your wallet',
-              style: TextStyle(
+            Text(
+              'Select amount to ${condition == "deposit" ? "deposit" : condition == "withdraw" ? "withdraw" : "transfer"} into your wallet',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: Colors.black54,
@@ -38,7 +40,6 @@ class Transfer extends StatelessWidget {
             const SizedBox(height: 20),
             _buildAmountInput(),
             const SizedBox(height: 24),
-
             if (condition == "transfer") _buildIBANInputField(),
             const Spacer(),
             _buildSubmitButton(context),
@@ -47,7 +48,6 @@ class Transfer extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildAmountInput() {
     return Container(
@@ -101,7 +101,7 @@ class Transfer extends StatelessWidget {
     );
   }
 
-  // IBAN Input Field
+  // IBAN Input Field for Transfers
   Widget _buildIBANInputField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -119,7 +119,7 @@ class Transfer extends StatelessWidget {
     );
   }
 
-  // Submit Button
+  // Submit Button for the action (deposit, withdraw, transfer)
   Widget _buildSubmitButton(BuildContext context) {
     final provider = Provider.of<UserProvider>(context, listen: false);
     return Container(
