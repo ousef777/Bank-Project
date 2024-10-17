@@ -105,16 +105,16 @@ class BranchListPage extends StatelessWidget {
                     Divider(color: Colors.blue.shade100, thickness: 1),
 
                     // Opening Hours
-                    Row(
-                      children: [
-                        Icon(Icons.access_time, color: Colors.blue.shade700, size: 20),
-                        SizedBox(width: 5),
-                        Text(
-                          'Opening Hours: ${branch['openingHours']}',
-                          style: TextStyle(fontSize: 14, color: Colors.black87),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Icon(Icons.access_time, color: Colors.blue.shade700, size: 20),
+                    //     SizedBox(width: 5),
+                    //     Text(
+                    //       'Opening Hours: ${branch['openingHours']}',
+                    //       style: TextStyle(fontSize: 14, color: Colors.black87),
+                    //     ),
+                    //   ],
+                    // ),
 
                     // Branch Address
                     Row(
