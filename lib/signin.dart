@@ -134,6 +134,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(color: Color(0xFF005BAA)), // Burgan Bank Blue
               ),
             ),
+            const SizedBox(height: 20),
+            // New button for Branch List Page
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF005BAA),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                // Navigate to the Branch List Page
+                GoRouter.of(context).go('/branch_list');
+              },
+              child: const Text(
+                "View Branches",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),
