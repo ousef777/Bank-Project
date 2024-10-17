@@ -11,6 +11,8 @@ class Transfer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Transfer"),),
       body: Center(
@@ -62,9 +64,11 @@ class Transfer extends StatelessWidget {
             ),
             onPressed: () {
               double mod = (condition == "deposit") ? 1 : -1;
-              Provider.of<UserProvider>(context, listen: false).currentUser?.balance += (double.parse(amountController.text) * mod);
+              provider.currentUser.balance += (double.parse(amountController.text) * mod);
+              provider.recordTransaction(condition, double.parse(amountController.text));
+
               if (condition == "transfer") {
-                Provider.of<UserProvider>(context, listen: false).transfer(double.parse(amountController.text), destinationController.text);
+                provider.transfer(double.parse(amountController.text), destinationController.text);
               }
               GoRouter.of(context).pop();
             }, 

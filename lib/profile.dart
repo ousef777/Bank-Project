@@ -31,9 +31,9 @@ class Profile extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Full Name: ${provider.currentUser?.fullName}",
+                    Text("Full Name: ${provider.currentUser.fullName}",
                         style: const TextStyle(fontSize: 28.0)),
-                    Text("Phone Number: ${provider.currentUser?.phoneNumber}",
+                    Text("Phone Number: ${provider.currentUser.phoneNumber}",
                         style: const TextStyle(fontSize: 28.0)),
                     const SizedBox(height: 20),
                     ElevatedButton(
@@ -63,7 +63,7 @@ class Profile extends StatelessWidget {
   }
 
   void _editPhoneNumber(BuildContext context, UserProvider provider) {
-    final phoneController = TextEditingController(text: provider.currentUser?.phoneNumber.toString());
+    final phoneController = TextEditingController(text: provider.currentUser.phoneNumber.toString());
 
     showDialog(
       context: context,

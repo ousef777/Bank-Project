@@ -13,17 +13,18 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFE5F1F9),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: const Color(0xFF005BAA), // Consistent with sign-in page
-        title: const Text("Dashboard"),
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0), // Adjust the padding to fit the logo
-          child: Image.asset('assets/images/burgan.jpg'), // Add your image here
-        ),
+        title: Image.asset('assets/images/burganbar.png'),
+        // leading: Padding(
+        //   padding: const EdgeInsets.all(8.0), // Adjust the padding to fit the logo
+        //   child: Image.asset('assets/images/burgan.jpg'), // Add your image here
+        // ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              GoRouter.of(context).go('/');
+              GoRouter.of(context).go('/signin');
             },
           ),
         ],
@@ -84,10 +85,34 @@ class Dashboard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            _buildTransactionItem('Scooter\'s Coffee', '-\$7.39', 'Restaurants & Dining'),
-            _buildTransactionItem('ATM Fee', '-\$2.00', 'Service Charges & Fees'),
-            _buildTransactionItem('Transfer from x0855', '-\$73.50', 'Other Expenses'),
-            _buildTransactionItem('Share 1000', '\$70.00', 'Other Income'),
+            ListView.builder(
+              reverse: true,
+              shrinkWrap: true,
+              //physics: const NeverScrollableScrollPhysics(),
+              itemCount: provider.currentUser.history.length,
+              itemBuilder: (BuildContext context, int index) {
+               //_buildTransactionItem(provider.currentUser.history[index][0], provider.currentUser.history[index][1], "category");
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(provider.currentUser.history[index][0], style: const TextStyle(fontSize: 18)),
+                  subtitle: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("category", style: TextStyle(color: Colors.black54)),
+                      Text(
+                        'Sep 18, 2024',
+                        style: TextStyle(color: Colors.black54),
+                      )
+                    ],
+                  ),
+                  trailing: Text(provider.currentUser.history[index][1].toString(), style: const TextStyle(fontSize: 18, color: Colors.black)),
+                );
+              }
+            )
+            // _buildTransactionItem('Scooter\'s Coffee', '-\$7.39', 'Restaurants & Dining'),
+            // _buildTransactionItem('ATM Fee', '-\$2.00', 'Service Charges & Fees'),
+            // _buildTransactionItem('Transfer from x0855', '-\$73.50', 'Other Expenses'),
+            // _buildTransactionItem('Share 1000', '\$70.00', 'Other Income'),
           ],
         ),
       ),

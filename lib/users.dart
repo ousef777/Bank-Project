@@ -7,7 +7,12 @@ class User {
   int phoneNumber;
   String fullName;
   
-  List<List> history = [];
+  List<List> history = [
+    ["Scooter's Coffee", 7.39],
+    ["ATM Fee", 2.00],
+    ["Transfer from x0855", 73.50],
+    ["Share 1000", 70.00],
+  ];
 
   User({
     required this.username, 
@@ -24,7 +29,7 @@ class UserProvider extends ChangeNotifier {
     User(username: "name", password: "password", balance: 200)
   ];
   
-  User? currentUser;
+  User currentUser = User(username: "name", password: "password", balance: 200);
 
 
   void addUser(String name, String password, [int phoneNumber = 123456789, String fullName = "None"]) {
@@ -49,15 +54,14 @@ class UserProvider extends ChangeNotifier {
 
  
   String getBalance() {
-    return "Balance: \$${currentUser?.balance.toStringAsFixed(2) ?? "0.00"}";
+    return "Balance: \$${currentUser.balance.toStringAsFixed(2)}";
   }
 
 
   void recordTransaction(String transaction, double amount) {
-    if (currentUser != null) {
-      currentUser?.history.add([transaction, amount]);
-      notifyListeners();
-    }
+    currentUser.history.add([transaction, amount]);
+    notifyListeners();
+  
   }
 
 
@@ -66,20 +70,18 @@ class UserProvider extends ChangeNotifier {
       (element) => element.username == username,
     );
     
-    if (user != null && currentUser != null && currentUser!.balance >= amount) {
-      user.balance += amount;
-      currentUser!.balance -= amount;
+    if (currentUser.balance >= amount) {
+      user?.balance += amount;
+      currentUser.balance -= amount;
       recordTransaction("Transfer to $username", amount);
-      recordTransaction("Received from ${currentUser!.username}", amount);
+      recordTransaction("Received from ${currentUser.username}", amount);
       notifyListeners();
     }
   }
 
   // Update phone number for current user
   void updatePhoneNumber(int newPhoneNumber) {
-    if (currentUser != null) {
-      currentUser!.phoneNumber = newPhoneNumber;
-      notifyListeners();
-    }
+    currentUser.phoneNumber = newPhoneNumber;
+    notifyListeners();
   }
 }
