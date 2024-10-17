@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () {
                 // Navigate to the Branch List Page
-                GoRouter.of(context).go('/branch_list');
+                GoRouter.of(context).push('/branch_list');
               },
               child: const Text(
                 "View Branches",
