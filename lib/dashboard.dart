@@ -13,21 +13,48 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFE5F1F9),
       appBar: AppBar(
+        //leading: const Text("Dashboard", softWrap: false,),
         centerTitle: true,
         backgroundColor: const Color(0xFF005BAA), // Consistent with sign-in page
-        title: Image.asset('assets/images/burganbar.png'),
+        title: Image.asset('assets/images/burganbar.png', color: Colors.white, scale: 5.0,),
         // leading: Padding(
         //   padding: const EdgeInsets.all(8.0), // Adjust the padding to fit the logo
         //   child: Image.asset('assets/images/burgan.jpg'), // Add your image here
         // ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              GoRouter.of(context).go('/signin');
+        actions: //[
+        //   IconButton(
+        //     icon: const Icon(Icons.logout),
+        //     onPressed: () {
+        //       GoRouter.of(context).go('/signin');
+        //     },
+        //   ),
+        // ],
+        <Widget>[
+          PopupMenuButton<String>(
+            elevation: 10,
+            iconSize: 50,
+            iconColor: Colors.white,
+            onSelected: (value) {
+              switch (value) {
+                case 'Profile':
+                  GoRouter.of(context).push('/profile');
+                  break;
+                case 'Sign out':
+                  GoRouter.of(context).push('/signin');
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'Profile', 'Sign out'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
             },
           ),
         ],
+        toolbarHeight: 100,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -47,7 +74,7 @@ class Dashboard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$${provider.getBalance().replaceAll('Balance: \$', '')}', // Format balance
+                    provider.getBalance(), // Format balance
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 40,
@@ -92,20 +119,22 @@ class Dashboard extends StatelessWidget {
               itemCount: provider.currentUser.history.length,
               itemBuilder: (BuildContext context, int index) {
                //_buildTransactionItem(provider.currentUser.history[index][0], provider.currentUser.history[index][1], "category");
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(provider.currentUser.history[index][0], style: const TextStyle(fontSize: 18)),
-                  subtitle: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("category", style: TextStyle(color: Colors.black54)),
-                      Text(
-                        'Sep 18, 2024',
-                        style: TextStyle(color: Colors.black54),
-                      )
-                    ],
+                return Card(
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(provider.currentUser.history[index][0], style: const TextStyle(fontSize: 18)),
+                    subtitle: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("category", style: TextStyle(color: Colors.black54)),
+                        Text(
+                          'Sep 18, 2024',
+                          style: TextStyle(color: Colors.black54),
+                        )
+                      ],
+                    ),
+                    trailing: Text(provider.currentUser.history[index][1].toString(), style: const TextStyle(fontSize: 18, color: Colors.black)),
                   ),
-                  trailing: Text(provider.currentUser.history[index][1].toString(), style: const TextStyle(fontSize: 18, color: Colors.black)),
                 );
               }
             )

@@ -9,10 +9,10 @@ class User {
   String? profilePicturePath;  // Add profile picture path
   
   List<List> history = [
-    ["Scooter's Coffee", 7.39],
-    ["ATM Fee", 2.00],
-    ["Transfer from x0855", 73.50],
-    ["Share 1000", 70.00],
+    ["Scooter's Coffee", -7.39],
+    ["ATM Fee", -2.00],
+    ["Transfer from x0855", -73.50],
+    ["Share 1000", -70.00],
   ];
 
   User({
@@ -57,7 +57,7 @@ class UserProvider extends ChangeNotifier {
 
   // Get balance for current user
   String getBalance() {
-    return "Balance: \$${currentUser.balance.toStringAsFixed(2)}";
+    return "Balance: ${currentUser.balance.toStringAsFixed(2)} KWD";
   }
 
   // Record transaction for the current user
@@ -76,7 +76,7 @@ class UserProvider extends ChangeNotifier {
     if (currentUser.balance >= amount) {
       user?.balance += amount;
       currentUser.balance -= amount;
-      recordTransaction("Transfer to $username", amount);
+      recordTransaction("Transfer to $username", amount * -1);
       user?.history.add(["Received from ${currentUser.username}", amount]);
       notifyListeners();
     }
