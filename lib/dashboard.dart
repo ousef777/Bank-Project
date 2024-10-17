@@ -49,19 +49,28 @@ class Dashboard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Refined Balance Section
             Container(
-              padding: const EdgeInsets.all(20.0),
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(25.0),
               decoration: BoxDecoration(
-                color: const Color(0xFF3D416C),
-                borderRadius: BorderRadius.circular(15),
+                color: const Color(0xFF005BAA),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    'Balance',
+                    'Your Balance',
                     style: TextStyle(
-                      color: Colors.white54,
+                      color: Colors.white70,
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                     ),
@@ -71,14 +80,22 @@ class Dashboard extends StatelessWidget {
                     provider.getBalance(),
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 36,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  const Text(
+                    'Updated Today',
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontSize: 14,
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             // Withdraw, Deposit, and Transfer buttons
             Row(
@@ -92,15 +109,16 @@ class Dashboard extends StatelessWidget {
             const SizedBox(height: 30),
 
             const Text(
-              'Transaction history',
+              'Transaction History',
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.black87,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
 
+            // Transaction list
             ListView.builder(
               reverse: true,
               shrinkWrap: true,
@@ -124,14 +142,17 @@ class Dashboard extends StatelessWidget {
     );
   }
 
+  // Action Button Builder (Deposit, Withdraw, Transfer)
   Widget _buildActionButton(BuildContext context, String label, IconData icon, String extra) {
     return Column(
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFFFFFFF), // White button with blue text
+            backgroundColor: const Color(0xFFFFFFFF),
             shape: const CircleBorder(),
             padding: const EdgeInsets.all(20),
+            shadowColor: Colors.black12,
+            elevation: 6,
           ),
           onPressed: () {
             GoRouter.of(context).push('/transfer', extra: extra);
@@ -152,13 +173,13 @@ class Dashboard extends StatelessWidget {
   IconData _getTransactionIcon(String transactionType) {
     switch (transactionType) {
       case 'deposit':
-        return Icons.arrow_upward; // Deposit icon
+        return Icons.arrow_upward;
       case 'withdraw':
-        return Icons.arrow_downward; // Withdraw icon
+        return Icons.arrow_downward;
       case 'transfer':
-        return Icons.swap_horiz; // Transfer icon
+        return Icons.swap_horiz;
       default:
-        return Icons.monetization_on; // Default money icon
+        return Icons.monetization_on;
     }
   }
 
@@ -167,7 +188,7 @@ class Dashboard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       color: const Color(0xFFFFFFFF),
-      elevation: 2,
+      elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -178,7 +199,7 @@ class Dashboard extends StatelessWidget {
             CircleAvatar(
               radius: 25,
               backgroundColor: isCredit ? Colors.green : Colors.red,
-              child: Icon(icon, color: Colors.white, size: 30), // Special icon for each transaction
+              child: Icon(icon, color: Colors.white, size: 30),
             ),
             const SizedBox(width: 16),
             Expanded(
