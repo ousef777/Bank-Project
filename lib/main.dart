@@ -1,4 +1,5 @@
 import 'package:bank_app/Splash.dart';
+import 'package:bank_app/branch_list_page.dart';
 import 'package:bank_app/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_app/signin.dart';
@@ -31,11 +32,11 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => SplashScreen(),  // Set SplashScreen as the initial route
+        builder: (context, state) => SplashScreen(),  
       ),
       GoRoute(
         path: '/signin',
-        builder: (context, state) => const HomeScreen(),  // The SignIn page
+        builder: (context, state) => const HomeScreen(),  
       ),
       GoRoute(
         path: '/dashboard',
@@ -53,6 +54,10 @@ class MyApp extends StatelessWidget {
         path: '/transfer',
         builder: (context, state) => Transfer(condition: state.extra as String),
       ),
+       GoRoute(
+      path: '/branch_list',
+      builder: (context, state) => BranchListPage(), 
+    ),
     ],
   );
 }
