@@ -11,7 +11,7 @@ class Transfer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<UserProvider>(context, listen: false);
+    //final provider = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,47 +35,6 @@ class Transfer extends StatelessWidget {
                 color: Colors.black54,
               ),
             ),
-<<<<<<< HEAD
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100.0),
-              child: TextField(
-                controller: amountController,
-                decoration: const InputDecoration(
-                  hintText: "Transfer Amount",
-                  prefixIcon: Icon(
-                    Icons.attach_money,
-                    color: Colors.blue,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    borderSide: BorderSide(
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor:
-                  WidgetStateProperty.all<Color>(Colors.deepPurpleAccent),
-            ),
-            onPressed: () {
-              double mod = (condition == "deposit") ? 1 : -1;
-              provider.currentUser.balance += (double.parse(amountController.text) * mod);
-              provider.recordTransaction(condition, double.parse(amountController.text));
-
-              if (condition == "transfer") {
-                provider.transfer(double.parse(amountController.text), destinationController.text);
-              }
-              GoRouter.of(context).pop();
-            }, 
-            child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("Submit", style: TextStyle(color: Colors.white),),
-            ),
-          )
-=======
             const SizedBox(height: 20),
             _buildAmountInput(),
             const SizedBox(height: 24),
@@ -83,7 +42,6 @@ class Transfer extends StatelessWidget {
             if (condition == "transfer") _buildIBANInputField(),
             const Spacer(),
             _buildSubmitButton(context),
->>>>>>> 9a931203ecaa9c2d8c7380285a81e188feda502a
           ],
         ),
       ),
@@ -163,6 +121,7 @@ class Transfer extends StatelessWidget {
 
   // Submit Button
   Widget _buildSubmitButton(BuildContext context) {
+    final provider = Provider.of<UserProvider>(context, listen: false);
     return Container(
       width: double.infinity,
       height: 50,
@@ -175,12 +134,11 @@ class Transfer extends StatelessWidget {
         ),
         onPressed: () {
           double mod = (condition == "deposit") ? 1 : -1;
-          Provider.of<UserProvider>(context, listen: false)
-              .currentUser
-              ?.balance += (double.parse(amountController.text) * mod);
+          provider.currentUser.balance += (double.parse(amountController.text) * mod);
+          provider.recordTransaction(condition, double.parse(amountController.text));
+
           if (condition == "transfer") {
-            Provider.of<UserProvider>(context, listen: false).transfer(
-                double.parse(amountController.text), destinationController.text);
+            provider.transfer(double.parse(amountController.text), destinationController.text);
           }
           GoRouter.of(context).pop();
         },

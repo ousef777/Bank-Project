@@ -89,9 +89,8 @@ class UserProvider extends ChangeNotifier {
 
   // Update profile picture for current user
   void updateProfilePicture(String path) {
-    if (currentUser != null) {
-      currentUser!.profilePicturePath = path;
-      notifyListeners();
-    }
+    currentUser.profilePicturePath = path;
+    notifyListeners();
+    
   }
 }

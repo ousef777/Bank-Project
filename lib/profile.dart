@@ -15,7 +15,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<UserProvider>(context, listen: true);
-    String? profilePicturePath = provider.currentUser?.profilePicturePath;
+    String? profilePicturePath = provider.currentUser.profilePicturePath;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,21 +57,10 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-<<<<<<< HEAD
                     Text("Full Name: ${provider.currentUser.fullName}",
                         style: const TextStyle(fontSize: 28.0)),
                     Text("Phone Number: ${provider.currentUser.phoneNumber}",
                         style: const TextStyle(fontSize: 28.0)),
-=======
-                    Text(
-                      "Full Name: ${provider.currentUser?.fullName}",
-                      style: const TextStyle(fontSize: 28.0),
-                    ),
-                    Text(
-                      "Phone Number: ${provider.currentUser?.phoneNumber}",
-                      style: const TextStyle(fontSize: 28.0),
-                    ),
->>>>>>> 9a931203ecaa9c2d8c7380285a81e188feda502a
                     const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -100,12 +89,7 @@ class _ProfileState extends State<Profile> {
   }
 
   void _editPhoneNumber(BuildContext context, UserProvider provider) {
-<<<<<<< HEAD
     final phoneController = TextEditingController(text: provider.currentUser.phoneNumber.toString());
-=======
-    final phoneController =
-        TextEditingController(text: provider.currentUser?.phoneNumber.toString());
->>>>>>> 9a931203ecaa9c2d8c7380285a81e188feda502a
 
     showDialog(
       context: context,
