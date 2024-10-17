@@ -133,12 +133,12 @@ class Transfer extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          double mod = (condition == "deposit") ? 1 : -1;
-          provider.currentUser.balance += (double.parse(amountController.text) * mod);
-          provider.recordTransaction(condition, double.parse(amountController.text));
-
           if (condition == "transfer") {
             provider.transfer(double.parse(amountController.text), destinationController.text);
+          } else {
+            double mod = (condition == "deposit") ? 1 : -1;
+            provider.currentUser.balance += (double.parse(amountController.text) * mod);
+            provider.recordTransaction(condition, double.parse(amountController.text));
           }
           GoRouter.of(context).pop();
         },

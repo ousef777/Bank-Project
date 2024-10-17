@@ -28,7 +28,8 @@ class User {
 class UserProvider extends ChangeNotifier {
   double bonus = 100;
   final List<User> _users = [
-    User(username: "name", password: "password", balance: 200)
+    User(username: "name", password: "password", balance: 200),
+    User(username: "name2", password: "pass", balance: 150)
   ];
   
   User currentUser = User(username: "name", password: "password", balance: 200);
@@ -76,7 +77,7 @@ class UserProvider extends ChangeNotifier {
       user?.balance += amount;
       currentUser.balance -= amount;
       recordTransaction("Transfer to $username", amount);
-      recordTransaction("Received from ${currentUser.username}", amount);
+      user?.history.add(["Received from ${currentUser.username}", amount]);
       notifyListeners();
     }
   }
