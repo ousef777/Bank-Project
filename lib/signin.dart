@@ -14,8 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Color usernameBorderColor = const Color(0xFF005BAA); // Matching Burgan Bank blue
-  Color passwordBorderColor = const Color(0xFF005BAA); // Matching Burgan Bank blue
+  Color usernameBorderColor = const Color(0xFF005BAA); 
+  Color passwordBorderColor = const Color(0xFF005BAA); 
 
   @override
   Widget build(BuildContext context) {

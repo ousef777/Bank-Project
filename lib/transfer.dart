@@ -22,7 +22,7 @@ class Transfer extends StatelessWidget {
               child: TextField(
                 controller: destinationController,
                 decoration: const InputDecoration(
-                  hintText: "Destination",
+                  hintText: "IBAN",
                   prefixIcon: Icon(
                     Icons.person,
                     color: Colors.blue,
