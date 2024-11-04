@@ -132,7 +132,7 @@ class Dashboard extends StatelessWidget {
                   amount: transactionAmount.toStringAsFixed(2),
                   date: 'Oct 17, 2024', // Placeholder for date
                   icon: _getTransactionIcon(transactionType), // Get special icon for the transaction
-                  isCredit: transactionType == "deposit", // Only deposits are credits
+                  isCredit: transactionAmount > 0, //(transactionType == "deposit" || transactionType == "transfer"), // Only deposits are credits
                 );
               },
             ),

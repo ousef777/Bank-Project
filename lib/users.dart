@@ -20,7 +20,7 @@ class User {
     required this.password, 
     required this.balance,
     this.phoneNumber = 123456789,
-    this.fullName = "None",
+    this.fullName = "Client name",
     this.profilePicturePath,
   });
 }

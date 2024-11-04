@@ -197,6 +197,7 @@ class _SignupState extends State<Signup> {
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
+            ElevatedButton(onPressed: () => GoRouter.of(context).go('/signin'), child: const Text("Back"))
           ],
         ),
       ),

@@ -137,8 +137,11 @@ class Transfer extends StatelessWidget {
             provider.transfer(double.parse(amountController.text), destinationController.text);
           } else {
             double mod = (condition == "deposit") ? 1 : -1;
-            provider.currentUser.balance += (double.parse(amountController.text) * mod);
-            provider.recordTransaction(condition, double.parse(amountController.text));
+            if (provider.currentUser.balance > double.parse(amountController.text) * mod * -1) {
+              provider.currentUser.balance += (double.parse(amountController.text) * mod);
+              provider.recordTransaction(condition, double.parse(amountController.text));
+            } else showError(context, "No enough funds");
+
           }
           GoRouter.of(context).pop();
         },
@@ -149,4 +152,13 @@ class Transfer extends StatelessWidget {
       ),
     );
   }
+
+  void showError(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: const Duration(seconds: 5),
+      content: Text(message),
+    ),
+  );
+}
 }
